@@ -325,7 +325,8 @@ full_plot
 ```
 
 Findings:
-* Overall, the New York Knicks's shots have not changed much over time. 
+
+* Overall, the New York Knicks' shots have not changed much over time. 
 * Throughout the years, the New York Knicks tend to miss shots taken far outside of the 3 point line. 
 
 More Detailed Findings:
@@ -442,5 +443,5 @@ both_plot_missed
 
 ```
 
-* The first graph represents the shots made by the Boston Celtics and New York Knicks with less than 15 seconds on the clock from 2014-2023. The second graph represents the shots missed by the Boston Celtics and New York Knicks with less than 15 seconds on the clock from 2014-2023. Looking at the number of data points over these 10 years, Boston made 797 shots and New York made 831 shots, while Boston missed 1690 and New York missed 1633. Boston made around 32% of shots while New York made slightly more are 33%. From the plots, it is clear that shooting shots far beyond the 3 point line usually results in a missed shot. Both teams miss more shots than they make, and we cannot conclude that one team makes more shots than the other team because it is around the same. 
+* The first graph represents the shots made by the Boston Celtics and New York Knicks with less than 15 seconds on the clock from 2014-2023. The second graph represents the shots missed by the Boston Celtics and New York Knicks with less than 15 seconds on the clock from 2014-2023. Looking at the number of data points over these 10 years, Boston made 797 shots and New York made 831 shots, while Boston missed 1690 and New York missed 1633. Boston made around 32% of shots while New York made slightly more with 33%. From the plots, it is clear that shooting shots far beyond the 3 point line usually results in a missed shot. Both teams miss more shots than they make, and we cannot conclude that one team makes more shots than the other team because it is around the same. 
 
