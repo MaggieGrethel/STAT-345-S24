@@ -1,5 +1,5 @@
 ---
-title: "Report of New York Knicks Snot Charts"
+title: "Report of New York Knicks Shot Charts"
 output:
   word_document: default
   pdf_document: default
@@ -93,22 +93,6 @@ p9
 e_10=ggplot(table_10, aes(locationX, locationY))
 p10=e_10 + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") +labs(x="",y="",title="New York Knicks Basketball Shots 2014",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_minimal() +coord_cartesian( ylim = c(-40, 450))
 p10
-
-
-```
-
-```{r include=FALSE}
-p1
-p2
-p3
-p4
-p5
-p6
-p7
-p8
-p9
-p10
-
 
 
 ```
@@ -326,7 +310,7 @@ geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=
 geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
  geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
   geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) +  # creates middle semicircle 
-facet_wrap(~yearSeason,ncol =5)
+facet_wrap(~yearSeason,ncol =4)
 
 #Using the same code from the separate plots to create a plot of multiple seasons in order to facet by years. Then, group the full plot by the separate seasons. 
 
@@ -402,7 +386,7 @@ NY_and_rival_missed=bind_rows(full_table,rival_full_table) %>% filter(.,minutesR
 
 
 both_teams_made=ggplot(NY_and_rival_made, aes(locationX, locationY))
-both_plot_made= both_teams_made+ geom_point(aes(color=factor(nameTeam)),alpha=.4,position="jitter") + labs(x="",y="",title="2014-2023 Made Shots With Under 15 Seconds Remaining ",color="Teams")+scale_color_manual(values=c("#008348","blue")) + theme_minimal()+coord_cartesian( ylim = c(-40, 450)) + geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+both_plot_made= both_teams_made+ geom_point(aes(color=factor(nameTeam)),alpha=.4,position="jitter") + labs(x="",y="",title="2014-2023 Made Shots With Under 15 Seconds ",color="Teams")+scale_color_manual(values=c("#008348","blue")) + theme_minimal()+coord_cartesian( ylim = c(-40, 450)) + geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
 geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
 geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
 geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
@@ -422,7 +406,7 @@ geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=
 # create plot of shots made by both teams with colors representing the team
 
 both_teams_missed=ggplot(NY_and_rival_missed, aes(locationX, locationY))
-both_plot_missed= both_teams_missed+ geom_point(aes(color=factor(nameTeam)),alpha=.4,position="jitter") + labs(x="",y="",title="2014-2023 Missed Shots With Under 15 Seconds Remaining ",color="Teams")+scale_color_manual(values=c("#008348","blue")) + theme_minimal()+coord_cartesian( ylim = c(-40, 450)) +
+both_plot_missed= both_teams_missed+ geom_point(aes(color=factor(nameTeam)),alpha=.4,position="jitter") + labs(x="",y="",title="2014-2023 Missed Shots with Under 15 Seconds ",color="Teams")+scale_color_manual(values=c("#008348","blue")) + theme_minimal()+coord_cartesian( ylim = c(-40, 450)) +
   geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
 geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
 geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
