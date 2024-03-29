@@ -1,0 +1,462 @@
+---
+title: "Report of New York Knicks Snot Charts"
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+date: "2024-03-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+library(tidyverse)
+library(nbastatR)
+library(ggplot2)
+library(devtools)
+library(gganimate)
+Sys.setenv("VROOM_CONNECTION_SIZE" = 131072 * 2)
+
+team_colors=c("blue","orange")
+#colors for missed versus made shots
+table_1=teams_shots(teams = "New York Knicks",seasons = 2023) 
+table_1=select(table_1,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+table_2=teams_shots(teams = "New York Knicks",seasons = 2022)
+table_2=select(table_2,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+table_3=teams_shots(teams = "New York Knicks",seasons = 2021)
+table_3=select(table_3,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+table_4=teams_shots(teams = "New York Knicks",seasons = 2020)
+table_4=select(table_4,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+table_5=teams_shots(teams = "New York Knicks",seasons = 2019)
+table_5=select(table_5,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+table_6=teams_shots(teams = "New York Knicks",seasons = 2018)
+table_6=select(table_6,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+table_7=teams_shots(teams = "New York Knicks",seasons = 2017)
+table_7=select(table_7,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+table_8=teams_shots(teams = "New York Knicks",seasons = 2016)
+table_8=select(table_8,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+table_9=teams_shots(teams = "New York Knicks",seasons = 2015)
+table_9=select(table_9,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+table_10=teams_shots(teams = "New York Knicks",seasons = 2014)
+table_10=select(table_10,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+#takes data from separate seasons for the New York Knicks and creates separate tables
+
+
+```
+
+```{r include =FALSE}
+library(tidyverse)
+library(nbastatR)
+library(ggplot2)
+library(devtools)
+library(ggforce)
+
+e_1=ggplot(table_1, aes(locationX, locationY))
+p1=e_1 + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") + labs(x="",y="",title="New York Knicks Basketball Shots 2023",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_minimal() +coord_cartesian( ylim = c(-40, 450))
+p1
+#create a plot based on where the players made a shot on the court. Factor by whether that shot was made or not where orange is missed and blue is made. Using alpha and jitter helps to account for the overlap of points, and rescaling the graph to be to scale. Then repeat this for earlier years. 
+
+e_2=ggplot(table_2, aes(locationX, locationY))
+p2=e_2 + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") +labs(x="",y="",title="New York Knicks Basketball Shots 2022",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_minimal() +coord_cartesian( ylim = c(-40, 450))
+p2
+
+e_3=ggplot(table_3, aes(locationX, locationY))
+p3=e_3 + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") +labs(x="",y="",title="New York Knicks Basketball Shots 2021",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_minimal() +coord_cartesian( ylim = c(-40, 450))
+p3
+
+e_4=ggplot(table_4, aes(locationX, locationY))
+p4=e_4 + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") +labs(x="",y="",title="New York Knicks Basketball Shots 2020",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_minimal() +coord_cartesian( ylim = c(-40, 450))
+p4
+
+e_5=ggplot(table_5, aes(locationX, locationY))
+p5=e_5 + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") +labs(x="",y="",title="New York Knicks Basketball Shots 2019",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_minimal() +coord_cartesian( ylim = c(-40, 450))
+p5
+
+e_6=ggplot(table_6, aes(locationX, locationY))
+p6=e_6 + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") +labs(x="",y="",title="New York Knicks Basketball Shots 2018",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_minimal() +coord_cartesian( ylim = c(-40, 450))
+p6
+
+e_7=ggplot(table_7, aes(locationX, locationY))
+p7=e_7 + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") +labs(x="",y="",title="New York Knicks Basketball Shots 2017",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_minimal() +coord_cartesian( ylim = c(-40, 450))
+p7
+
+e_8=ggplot(table_8, aes(locationX, locationY))
+p8=e_8 + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") +labs(x="",y="",title="New York Knicks Basketball Shots 2016",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_minimal() +coord_cartesian( ylim = c(-40, 450))
+p8
+
+e_9=ggplot(table_9, aes(locationX, locationY))
+p9=e_9 + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") +labs(x="",y="",title="New York Knicks Basketball Shots 2015",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_minimal() +coord_cartesian( ylim = c(-40, 450))
+p9
+
+e_10=ggplot(table_10, aes(locationX, locationY))
+p10=e_10 + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") +labs(x="",y="",title="New York Knicks Basketball Shots 2014",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_minimal() +coord_cartesian( ylim = c(-40, 450))
+p10
+
+
+```
+
+```{r include=FALSE}
+p1
+p2
+p3
+p4
+p5
+p6
+p7
+p8
+p9
+p10
+
+
+
+```
+
+```{r include =FALSE}
+# create different plots with court lines
+
+p1_court=p1+geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle 
+
+p2_court=p2+geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle
+
+p3_court=p3+geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle
+
+p4_court=p4+geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle
+
+p5_court=p5+geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle
+
+p6_court=p6+geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle
+
+p7_court=p7+geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle
+
+p8_court=p8+geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle
+
+p9_court=p9+geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle
+
+
+p10_court=p10+geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle
+
+```
+
+```{r include=FALSE}
+library(tidyverse)
+library(dplyr)
+library(gganimate)
+library(lubridate)
+
+
+full_table=bind_rows(table_1,table_2,table_3,table_4,table_5,table_6,table_7,table_8,table_9,table_10)
+#put all seasons in one table
+
+full_plot=ggplot(full_table, aes(locationX, locationY)) + geom_point(aes(color=factor(typeEvent)),alpha=.4,position="jitter") +labs(x="",y="",title="New York Knicks Basketball Shots By Year",color="Type of Shot")+scale_color_manual(values=team_colors) + theme_void() + coord_cartesian( ylim = c(-40, 450)) +geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) +  # creates middle semicircle 
+facet_wrap(~yearSeason,ncol =5)
+
+#Using the same code from the separate plots to create a plot of multiple seasons in order to facet by years. Then, group the full plot by the separate seasons. 
+
+
+
+```
+
+```{r echo=FALSE}
+
+full_plot
+
+```
+
+Findings:
+* Overall, the New York Knicks's shots have not changed much over time. 
+* Throughout the years, the New York Knicks tend to miss shots taken far outside of the 3 point line. 
+
+More Detailed Findings:
+
+```{r echo=FALSE}
+p1_court
+p2_court
+p3_court
+p4_court
+p5_court
+p6_court
+p7_court
+p8_court
+p9_court
+p10_court
+```
+
+* If you take a closer look the majority of the shots taken beyond the 3 pt. line were made with just seconds left in the game. This would make sense because players wouldn't have time to travel across the court thus decreasing the likelihood that the shot was made. Also, the majority of shots throughout the years cluster around the 3 pt. line or in the middle. There is also white space where players tend to not shoot from and that is right inside the 3 pt. line. From these plots, players tend to be more consistent scoring the closer they are to the basketball hoop. 
+
+```{r include=FALSE}
+
+library(tidyverse)
+rival_table_1=teams_shots(teams = "Boston Celtics",seasons = 2023)
+rival_table_1=select(rival_table_1,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+rival_table_2=teams_shots(teams = "Boston Celtics",seasons = 2022)
+rival_table_2=select(rival_table_2,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+rival_table_3=teams_shots(teams = "Boston Celtics",seasons = 2021)
+rival_table_3=select(rival_table_3,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+rival_table_4=teams_shots(teams = "Boston Celtics",seasons = 2020)
+rival_table_4=select(rival_table_4,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+rival_table_5=teams_shots(teams = "Boston Celtics",seasons = 2019)
+rival_table_5=select(rival_table_5,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+rival_table_6=teams_shots(teams = "Boston Celtics",seasons = 2018)
+rival_table_6=select(rival_table_6,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+rival_table_7=teams_shots(teams = "Boston Celtics",seasons = 2017)
+rival_table_7=select(rival_table_7,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+rival_table_8=teams_shots(teams = "Boston Celtics",seasons = 2016)
+rival_table_8=select(rival_table_8,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+rival_table_9=teams_shots(teams = "Boston Celtics",seasons = 2015)
+rival_table_9=select(rival_table_9,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+rival_table_10=teams_shots(teams = "Boston Celtics",seasons = 2014)
+rival_table_10=select(rival_table_10,yearSeason,typeEvent,nameTeam,minutesRemaining,locationX,locationY,secondsRemaining,isShotMade)
+#create separate data sets for the Boston Celtics based on season
+
+```
+
+```{r include=FALSE}
+
+
+rival_full_table=bind_rows(rival_table_1,rival_table_2,rival_table_3,rival_table_4,rival_table_5,rival_table_6,rival_table_7,rival_table_8,rival_table_9,rival_table_10)
+# combine separate data sets 
+
+NY_and_rival_made=bind_rows(full_table,rival_full_table) %>% filter(.,minutesRemaining==0,secondsRemaining<15,isShotMade==TRUE)
+# combine New York Knicks and Boston Celtics data and filter by shots made with less than 15 seconds remaining
+
+NY_and_rival_missed=bind_rows(full_table,rival_full_table) %>% filter(.,minutesRemaining==0,secondsRemaining<15,isShotMade==FALSE)
+# filter combined New York Knicks and Boston Celtics table by shots made with less than 15 seconds remaining 
+
+
+both_teams_made=ggplot(NY_and_rival_made, aes(locationX, locationY))
+both_plot_made= both_teams_made+ geom_point(aes(color=factor(nameTeam)),alpha=.4,position="jitter") + labs(x="",y="",title="2014-2023 Made Shots With Under 15 Seconds Remaining ",color="Teams")+scale_color_manual(values=c("#008348","blue")) + theme_minimal()+coord_cartesian( ylim = c(-40, 450)) + geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle
+# create plot of shots made by both teams with colors representing the team
+
+both_teams_missed=ggplot(NY_and_rival_missed, aes(locationX, locationY))
+both_plot_missed= both_teams_missed+ geom_point(aes(color=factor(nameTeam)),alpha=.4,position="jitter") + labs(x="",y="",title="2014-2023 Missed Shots With Under 15 Seconds Remaining ",color="Teams")+scale_color_manual(values=c("#008348","blue")) + theme_minimal()+coord_cartesian( ylim = c(-40, 450)) +
+  geom_path(data=data.frame(locationX=c(-25,25),locationY=c(0,0)),col="black",linewidth=1)+ # create backboard
+geom_path(data=data.frame(x=c(-6000:(-1)/1000,1:6000/1000),y=c(sqrt(6^2-c(-6000:(-1)/1000,1:6000/1000)^2))),aes(x=x,y=y),col="black",linewidth=1)+ #create semicirlce on backboard
+geom_circle(aes(x0 = 0, y0 = 15, r = 9), col="black",linewidth=1) + geom_path(data=data.frame(locationX=c(-228,-228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create left side straight line for 3 pt. line 
+geom_path(data=data.frame(locationX=c(228,228),locationY=c(-47.5,100)),col="black",linewidth=1) + #create right side straight line for 3 pt. line
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(-47.5,-47.5)),col="black",linewidth=1) + #creates outside bottom court line
+geom_path(data=data.frame(locationX=c(-250,-250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates left outside court line
+geom_path(data=data.frame(locationX=c(250,250),locationY=c(-47.5,422.5)),col="black",linewidth=1) + #creates right outside court line 
+geom_path(data=data.frame(locationX=c(-250,250),locationY=c(422.5,422.5)),col="black",linewidth=1) + #creates top court line 
+geom_path(data=data.frame(locationX=c(-80,80),locationY=c(140,140)),col="black",linewidth=1) + #creates top free throw line 
+geom_path(data=data.frame(locationX=c(-80,-80),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side outer box
+geom_path(data=data.frame(locationX=c(-60,-60),locationY=c(-47.5,140)),col="black",linewidth=1) + #creates left side inner box 
+geom_path(data=data.frame(locationX=c(60,60),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side inner box
+geom_path(data=data.frame(locationX=c(80,80),locationY=c(-47.5,140)),col="black",linewidth=1) +  #creates right side outer box 
+geom_curve(x=-60,y=140,xend=60,yend=140,col="black",curvature = 0.85, linewidth=1,linetype="dashed") + #creates curve inside inner box 
+geom_curve(x=60,y=140,xend=-60,yend=140,col="black",curvature = 0.85, linewidth=1) + #creates curve outside inner box 
+ geom_curve(x=228,y=100,xend=-228,yend=100,col="black",curvature = 0.75, linewidth=1) + #creates 3 pt. curve
+  geom_curve(x=-60,y=422.5,xend=60,yend=422.5,col="black",curvature = 0.85, linewidth=1) # creates middle semicircle
+# create plot of shots missed by both teams with colors representing the team
+
+boston_percentage_of_shots_made=797/(797+1690)
+#percentage of shots made by Boston Celtics from 2014-2023
+ny_percentage_of_shots_made=831/(831+1633)
+#percentage of shots made by New York Knicks form 2014-2023
+
+
+```
+
+```{r echo=FALSE}
+
+both_plot_made
+
+both_plot_missed
+
+```
+
+* The first graph represents the shots made by the Boston Celtics and New York Knicks with less than 15 seconds on the clock from 2014-2023. The second graph represents the shots missed by the Boston Celtics and New York Knicks with less than 15 seconds on the clock from 2014-2023. Looking at the number of data points over these 10 years, Boston made 797 shots and New York made 831 shots, while Boston missed 1690 and New York missed 1633. Boston made around 32% of shots while New York made slightly more are 33%. From the plots, it is clear that shooting shots far beyond the 3 point line usually results in a missed shot. Both teams miss more shots than they make, and we cannot conclude that one team makes more shots than the other team because it is around the same. 
+
