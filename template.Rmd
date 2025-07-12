@@ -1,0 +1,131 @@
+---
+title: "Super Awesome Project Template"
+output: word_document
+date: "2023-03-31"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Section One
+
+```{r student1,eval=FALSE}
+
+library(rvest)
+library(stringr)
+library(tidyr)
+library(sf)
+library(tidyverse)
+library(dplyr)
+
+#read in data from website and store urls and GEOIDS
+url <- "https://www2.census.gov/geo/tiger/TIGER2023/ROADS/"
+x <- readLines(url)
+GEOID_url <- x %>% str_extract(pattern = "tl_2023_\\d{5}_roads.zip")
+GEOID_url <- na.omit(GEOID_url)
+GEOID <- GEOID_url %>% str_extract(pattern = "\\d{5}")
+
+#store the most common GEOIDs found
+Road_suffixes <- c("Rd", "Co Rd", "Ln", "St", "Dr", "Ct", "Ave", "Cir", "82", "Way", "Loop", "Pl", "Blvd")
+
+# Create an empty list to store data frames based on GEOID
+geoid_dfs1 <- list()
+
+# Create a for loop to go through each GEOID to download, and unzip the data
+for (i in 1:3233) {
+  curGEOID <- GEOID[i]
+  GEOID_file <- GEOID_url[i]
+  url11 <- str_c("https://www2.census.gov/geo/tiger/TIGER2023/ROADS/", GEOID_file)
+  temp_file <- tempfile()  # Create a temporary file to store the downloaded data
+  download.file(url11, dest = temp_file, mode = "wb")  # Download the data
+  unzip(temp_file, exdir = "RoadData")  # Unzip the downloaded file
+  
+  # Read the shapefile into a dataframe, selecting only the FULLNAME column
+  my_sf1 <- st_read(dsn = "RoadData", quiet = TRUE)[, "FULLNAME", drop = FALSE]
+  
+  # Calculate counts of road suffixes with a function
+  roads=function(x) {
+  my_sf1$FULLNAME %>% str_which(.,x)
+}
+g=sapply(Road_suffixes,roads)
+
+d=c(length(g$Rd),
+    length(g$`Co Rd`),length(g$Ln),length(g$St),length(g$Dr),length(g$Ct),length(g$Ave),length(g$Cir),length(g$`82`),length(g$Way),length(g$Loop),length(g$Pl),length(g$Blvd))
+
+#attach the most common with their suffix name
+names(d)=Road_suffixes
+temp=slice_max(as.data.frame(d),d,n=2) %>% rownames()
+  
+  
+  # Get the most common and second most common road suffixes
+  most_common1 <- temp[1]
+  second_most_common1 <- temp[2]
+  
+  # Create a data frame for the current GEOID
+  geoid_df1 <- data.frame(GEOID = curGEOID, MostCommon = most_common1, SecondMost = second_most_common1, stringsAsFactors = FALSE)
+  
+  # Add the data frame to the list
+  geoid_dfs1[[i]] <- geoid_df1
+  
+  # Remove temporary files 
+  file.remove(temp_file)
+  unlink("RoadData", recursive = TRUE, force = TRUE)
+}
+
+# Combine the list of data frames into a single data frame
+combined <- do.call(rbind, geoid_dfs1)
+
+# Write the combined data to a CSV file
+write_csv(combined, "combined.csv")
+
+# Remove the same rows based on GEOID
+final <- combined %>% distinct(GEOID, .keep_all = TRUE)
+
+# Write the final data to a CSV file 
+write_csv(final, "final.csv")
+
+
+```
+
+
+## Section Two
+
+```{r student2}
+#libraries for plot 
+library(tigris)
+library(ggplot2)
+
+#taking the county shapefile from each state 
+counties <- counties(c("Alabama","Arizona", "Arkansas", "California","Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin","Wyoming"), cb = TRUE)
+
+
+
+#create colors to color the plot based on Road Suffixes 
+suffix_colors=c("Rd"="blue","Co Rd"="orange","Ln"="darkgreen", "St"="lightblue", "Dr"="yellow", "Ct"="red","Ave"=="purple","Cir"="lightgreen","82"="pink","Loop"="maroon","Pl"="black","Blvd"="grey")
+
+#create plot based on most common road suffixes for each county
+USA <- ggplot() +
+    geom_sf(data = final_combined, aes(fill = MostCommon))+scale_fill_manual(values=suffix_colors)
+USA
+
+#create plot based on second most common road suffixes for each county
+USA2 <- ggplot() +
+    geom_sf(data = final_combined, aes(fill = SecondMost)) +scale_fill_manual(values=suffix_colors)
+USA2
+
+#create plot based on whether or not the most common suffix is road 
+USA3 <- ggplot() +
+  geom_sf(data = final_combined, aes(fill = MostCommon == "Rd")) +
+  labs(fill = "Roads")
+USA3
+
+#combine counties shapefiles for each state with with most common and second most common road suffixes based on their GEOID
+final_combined=merge(counties,final,by="GEOID")
+
+```
+
+
+
+
+```
